@@ -1,4 +1,4 @@
-# 🫁 AI Pneumonia Detector
+# AI Pneumonia Detector
 
 O aplicație Full-Stack (React + Python) bazată pe Inteligență Artificială, concepută pentru a analiza radiografii pulmonare și a detecta semnele de pneumonie. Proiectul folosește un model de Deep Learning (MobileNetV2) antrenat pe un set de date clinic și este optimizat pentru a funcționa corect pe date din lumea reală.
 
@@ -14,7 +14,7 @@ Acest proiect rezolvă această provocare printr-un **filtru avansat de pre-proc
 
 ---
 
-## ✨ Sistemul de Triage Medical pe 3 Niveluri
+## ✨ Sistemul de Triaj Medical pe 3 Niveluri
 Pentru a reflecta prudența din medicina reală, AI-ul nu ia decizii absolute de tip "Alb/Negru" (unde pragul clasic de 50% poate fi periculos). Diagnosticul este împărțit astfel:
 
 * 🟢 **SĂNĂTOS:** Risc de boală sub 50%.
@@ -46,29 +46,38 @@ Aplicația are o arhitectură decuplată. Trebuie să pornești simultan serveru
 Deschide un terminal în folderul principal al proiectului și instalează modulele necesare:
 ```bash
 pip install fastapi uvicorn tensorflow pillow python-multipart numpy matplotlib
+```
 
 Pornește serverul:
-
+```bash
 uvicorn api:app --reload
-(Serverul va rula invizibil pe http://localhost:8000 și va aștepta să proceseze imagini)
+```
+*(Serverul va rula invizibil pe `http://localhost:8000` și va aștepta să proceseze imagini)*
 
-Notă pentru Debug: Există și un script main.py pe care îl poți rula în terminal (python main.py) pentru a testa rețeaua neurală strict la nivel de consolă, fără interfața web.
+> **Notă pentru Debug:** Există și un script `main.py` pe care îl poți rula în terminal cu comanda `python main.py` pentru a testa rețeaua neurală strict la nivel de consolă, fără interfața web.
 
-2. Pornirea Interfeței Web (Frontend / React)
-Deschide un al doilea terminal și navighează în folderul frontend-ului:
-
+### 2. Pornirea Interfeței Web (Frontend / React)
+Deschide un **al doilea terminal** și navighează în folderul frontend-ului:
+```bash
 cd frontend_PneumoniaDetector
-Instalează pachetele Node:
+```
 
+Instalează pachetele Node:
+```bash
 npm install
+```
 
 Pornește aplicația:
-
+```bash
 npm run dev
-(Dă click pe linkul generat în terminal, de obicei http://localhost:5173, pentru a deschide aplicația direct în browserul tău)
+```
+*(Dă click pe linkul generat în terminal, de obicei `http://localhost:5173`, pentru a deschide aplicația direct în browserul tău)*
 
-📁 Structura Proiectului
-Plaintext
+---
+
+## 📁 Structura Proiectului
+
+```text
 /
 ├── api.py                     # API-ul REST principal (FastAPI) și logica de filtrare
 ├── main.py                    # Script de testare locală (CLI)
@@ -85,13 +94,14 @@ Plaintext
         ├── App.css            # Stilurile UI
         ├── main.jsx           # Punctul de intrare pentru React
         └── index.css          # Setări globale CSS
+```
 
-🛑 Limitări Cunoscute
+---
+
+## 🛑 Limitări Cunoscute
 Fiind antrenat specific pe radiografii clinice standard de tip PA (Postero-Anterior), sistemul prezintă următoarele limitări:
+* Nu procesează corect radiografii efectuate din profil (lateral).
+* Poate returna rezultate eronate (Fals Pozitive) dacă imaginea conține editări vizibile (ex: săgeți colorate suprapuse, texte masive sau decupaje nenaturale).
 
-Nu procesează corect radiografii efectuate din profil (lateral).
-
-Poate returna rezultate eronate (Fals Pozitive) dacă imaginea conține editări vizibile (ex: săgeți colorate suprapuse, texte masive sau decupaje nenaturale).
-
-⚠️ Disclaimer
-Acesta este un proiect educațional demonstrativ de Machine Learning. Deși folosește tehnologii avansate de recunoaștere a imaginilor, NU este un dispozitiv medical aprobat și nu trebuie folosit pentru diagnosticare în viața reală. Orice decizie medicală trebuie luată exclusiv de un medic specialist.
+## ⚠️ Disclaimer
+Acesta este un proiect educațional demonstrativ de Machine Learning. Deși folosește tehnologii avansate de recunoaștere a imaginilor, **NU** este un dispozitiv medical aprobat și nu trebuie folosit pentru diagnosticare în viața reală. Orice decizie medicală trebuie luată exclusiv de un medic specialist.
