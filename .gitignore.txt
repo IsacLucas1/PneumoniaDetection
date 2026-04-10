@@ -1,0 +1,12 @@
+# Fisiere React
+node_modules/
+dist/
+build/
+
+# Fisiere Python
+venv/
+__pycache__/
+*.pyc
+
+# Fisiere sistem de operare
+.DS_Store

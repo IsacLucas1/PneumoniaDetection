@@ -1,0 +1,235 @@
+/* Reset si setari generale */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+  color: #2c3e50;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 650px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Header */
+.app-header {
+  text-align: center;
+}
+
+.app-header h1 {
+  font-size: 2.5rem;
+  color: #1a252f;
+  margin-bottom: 8px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}
+
+.app-header p {
+  color: #596a7a;
+  font-size: 1.1rem;
+}
+
+/* Cardul Principal */
+.card-container {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+}
+
+/* Zona de Upload Custom */
+.upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+input[type="file"] {
+  display: none; /* Ascundem butonul urat implicit al browserului */
+}
+
+.custom-upload-btn {
+  background-color: #f1f3f5;
+  color: #495057;
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: 2px dashed #ced4da;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-align: center;
+}
+
+.custom-upload-btn:hover {
+  background-color: #e2e6ea;
+  border-color: #adb5bd;
+  color: #212529;
+}
+
+.file-name {
+  font-size: 0.85rem;
+  color: #6c757d;
+  font-style: italic;
+}
+
+/* Previzualizare Imagine */
+.preview-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.image-preview {
+  max-width: 100%;
+  max-height: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  object-fit: contain;
+}
+
+/* Butonul de Analiza */
+.analyze-btn {
+  background: linear-gradient(135deg, #0061ff 0%, #60efff 100%);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+  width: 100%;
+  box-shadow: 0 6px 15px rgba(0, 97, 255, 0.3);
+}
+
+.analyze-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 97, 255, 0.4);
+}
+
+.analyze-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.analyze-btn:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+/* Animație pentru statusul de "Loading" */
+.pulsing {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(0.98); opacity: 1; box-shadow: 0 0 20px rgba(0, 97, 255, 0.6); }
+  100% { transform: scale(1); opacity: 0.9; }
+}
+
+/* Cardul cu Rezultatul Final */
+.result-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 15px;
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Culori pentru diagnostice */
+.healthy {
+  background-color: #f0fdf4;
+  border: 2px solid #bbf7d0;
+  color: #166534;
+}
+
+.pneumonia {
+  background-color: #fef2f2;
+  border: 2px solid #fecaca;
+  color: #991b1b;
+}
+
+.suspect {
+  background-color: #fff8e1;
+  border: 2px solid #ffb300;
+  color: #ff8f00;
+}
+
+.result-icon {
+  font-size: 3rem;
+}
+
+.result-details {
+  flex: 1;
+}
+
+.result-details h2 {
+  font-size: 1.4rem;
+  margin-bottom: 10px;
+}
+
+.suspect .result-details h2 {
+  color: #ef6c00;
+}
+
+/* Bara de progres pentru Siguranta */
+.confidence-bar-bg {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+
+.confidence-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 1s cubic-bezier(0.1, 0.8, 0.2, 1);
+}
+
+.healthy .confidence-bar-fill { background-color: #22c55e; }
+.pneumonia .confidence-bar-fill { background-color: #ef4444; }
+.suspect .confidence-bar-fill { background-color: #ff9800; }
+
+.result-details p {
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Footer */
+.app-footer {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 0.85rem;
+  margin-top: 20px;
+}
