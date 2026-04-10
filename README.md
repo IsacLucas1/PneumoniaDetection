@@ -1,34 +1,99 @@
-# AI Pneumonia Detector
+# 🫁 AI Pneumonia Detector
 
-O aplicație Full-Stack (React + Python) bazată pe Inteligență Artificială, creată pentru a analiza radiografii pulmonare și a detecta semnele de pneumonie. Proiectul folosește un model de Deep Learning (MobileNetV2) antrenat pe un set de date clinic și dispune de un sistem robust de pre-procesare a imaginilor pentru a funcționa corect pe date din lumea reală.
+O aplicație Full-Stack (React + Python) bazată pe Inteligență Artificială, concepută pentru a analiza radiografii pulmonare și a detecta semnele de pneumonie. Proiectul folosește un model de Deep Learning (MobileNetV2) antrenat pe un set de date clinic și este optimizat pentru a funcționa corect pe date din lumea reală.
 
-## ✨ Caracteristici Cheie
+---
 
-* **Arhitectură Decuplată (Full-Stack):** Frontend modern și rapid construit cu React (Vite), care comunică printr-un API REST cu un server de Python (FastAPI).
-* **Filtru de Pre-procesare (Domain Shift Mitigation):** Aplicația rezolvă problema clasică de *Domain Shift* (diferența dintre datele de laborator și pozele reale). Backend-ul taie automat marginile negre inutile (Auto-Crop), forțează conversia în tonuri de gri și aplică *Autocontrast* pentru a aduce radiografia la standardele clinice înainte de a o trimite către AI.
-* **Sistem de Triaj Medical pe 3 Niveluri:** Modelul nu gândește doar în "Alb și Negru". Pentru a imita prudența medicală reală, diagnosticul este împărțit astfel:
-  * 🟢 **SĂNĂTOS:** Risc de boală sub 50%.
-  * 🟠 **SUSPECT (Necesită verificare):** Zonă de incertitudine (risc 50% - 80%). Semnalează medicului o posibilă anomalie.
-  * 🔴 **PNEUMONIE:** Siguranță de peste 80% a prezenței infecției.
+## 💡 Problema pe care o rezolvă (Domain Shift)
+În mod frecvent, modelele AI medicale funcționează perfect în mediul controlat de antrenament, dar eșuează când primesc radiografii din surse noi (de pe internet sau de la alte aparate). Această problemă poartă numele de **Domain Shift**. 
+
+Acest proiect rezolvă această provocare printr-un **filtru avansat de pre-procesare**:
+* **Auto-Crop:** Elimină automat marginile negre inutile generate de scanere.
+* **Grayscale Forțat:** Previne erorile cauzate de imaginile salvate accidental cu profil de culoare RGB.
+* **Autocontrast:** Normalizează luminozitatea pentru a aduce radiografia la standardele de vizibilitate clinică înainte de a fi trimisă rețelei neurale.
+
+---
+
+## ✨ Sistemul de Triage Medical pe 3 Niveluri
+Pentru a reflecta prudența din medicina reală, AI-ul nu ia decizii absolute de tip "Alb/Negru" (unde pragul clasic de 50% poate fi periculos). Diagnosticul este împărțit astfel:
+
+* 🟢 **SĂNĂTOS:** Risc de boală sub 50%.
+* 🟠 **SUSPECT (Necesită verificare):** Zonă de incertitudine (risc 50% - 80%). Semnalează medicului o posibilă anomalie sau o calitate slabă a imaginii, solicitând intervenție umană.
+* 🔴 **PNEUMONIE:** Siguranță de peste 80% a prezenței infecției (opacități / consolidări vizibile).
+
+---
 
 ## 🛠️ Tehnologii Folosite
 
-**Frontend:**
+**Frontend (Interfața Utilizator):**
 * React (via Vite)
 * JavaScript / JSX
-* CSS pur (Design responsiv și dinamic în funcție de diagnostic)
+* CSS3 (Design responsiv și dinamic în funcție de starea diagnosticului)
 
-**Backend & AI:**
+**Backend & Deep Learning:**
 * Python
-* FastAPI & Uvicorn (Server REST rapid)
-* TensorFlow / Keras (Modelul Deep Learning MobileNetV2)
-* Pillow (PIL) & NumPy (Procesare imagini)
+* FastAPI & Uvicorn (Server REST)
+* TensorFlow / Keras (Model: MobileNetV2)
+* Pillow (PIL) & NumPy (Pre-procesarea avansată a imaginilor)
+
+---
 
 ## 🚀 Cum să rulezi proiectul local
 
-Aplicația este formată din două părți care trebuie pornite simultan în două terminale separate.
+Aplicația are o arhitectură decuplată. Trebuie să pornești simultan serverul de AI (Backend) și interfața web (Frontend) în **două terminale separate**.
 
 ### 1. Pornirea Serverului AI (Backend / Python)
-Deschide un terminal în folderul principal al proiectului și instalează dependențele (dacă nu le ai deja):
+Deschide un terminal în folderul principal al proiectului și instalează modulele necesare:
 ```bash
 pip install fastapi uvicorn tensorflow pillow python-multipart numpy matplotlib
+Pornește serverul:
+
+Bash
+uvicorn api:app --reload
+(Serverul va rula invizibil pe http://localhost:8000 și va aștepta să proceseze imagini)
+
+Notă pentru Debug: Există și un script main.py pe care îl poți rula în terminal (python main.py) pentru a testa rețeaua neurală strict la nivel de consolă, fără interfața web.
+
+2. Pornirea Interfeței Web (Frontend / React)
+Deschide un al doilea terminal și navighează în folderul frontend-ului:
+
+Bash
+cd frontend_PneumoniaDetector
+Instalează pachetele Node:
+
+Bash
+npm install
+Pornește aplicația:
+
+Bash
+npm run dev
+(Dă click pe linkul generat în terminal, de obicei http://localhost:5173, pentru a deschide aplicația direct în browserul tău)
+
+📁 Structura Proiectului
+Plaintext
+/
+├── api.py                     # API-ul REST principal (FastAPI) și logica de filtrare
+├── main.py                    # Script de testare locală (CLI)
+├── model_pneumonie.h5         # Modelul neural antrenat (Ponderile MobileNetV2)
+├── radio1.jpg - radio10.jpg   # Imagini locale de testare
+├── .gitignore                 # Fișiere ignorate de sistemul Git
+└── frontend_PneumoniaDetector/ # Aplicația interfeței web
+    ├── package.json           # Dependențele de UI
+    ├── vite.config.js         # Configurarea mediului de dezvoltare Vite
+    ├── index.html             # Punctul de intrare HTML
+    ├── public/                # Active vizuale și iconițe SVG
+    └── src/                   # Codul sursă React
+        ├── App.jsx            # Componenta principală (Logica aplicației)
+        ├── App.css            # Stilurile UI
+        ├── main.jsx           # Punctul de intrare pentru React
+        └── index.css          # Setări globale CSS
+
+🛑 Limitări Cunoscute
+Fiind antrenat specific pe radiografii clinice standard de tip PA (Postero-Anterior), sistemul prezintă următoarele limitări:
+
+Nu procesează corect radiografii efectuate din profil (lateral).
+
+Poate returna rezultate eronate (Fals Pozitive) dacă imaginea conține editări vizibile (ex: săgeți colorate suprapuse, texte masive sau decupaje nenaturale).
+
+⚠️ Disclaimer
+Acesta este un proiect educațional demonstrativ de Machine Learning. Deși folosește tehnologii avansate de recunoaștere a imaginilor, NU este un dispozitiv medical aprobat și nu trebuie folosit pentru diagnosticare în viața reală. Orice decizie medicală trebuie luată exclusiv de un medic specialist.
