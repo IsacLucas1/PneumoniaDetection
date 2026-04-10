@@ -48,7 +48,7 @@ Deschide un terminal în folderul principal al proiectului și instalează modul
 pip install fastapi uvicorn tensorflow pillow python-multipart numpy matplotlib
 
 Pornește serverul:
-```Bash
+
 uvicorn api:app --reload
 (Serverul va rula invizibil pe http://localhost:8000 și va aștepta să proceseze imagini)
 
@@ -57,15 +57,13 @@ Notă pentru Debug: Există și un script main.py pe care îl poți rula în ter
 2. Pornirea Interfeței Web (Frontend / React)
 Deschide un al doilea terminal și navighează în folderul frontend-ului:
 
-```Bash
 cd frontend_PneumoniaDetector
 Instalează pachetele Node:
 
-```Bash
 npm install
 
 Pornește aplicația:
-```Bash
+
 npm run dev
 (Dă click pe linkul generat în terminal, de obicei http://localhost:5173, pentru a deschide aplicația direct în browserul tău)
 
