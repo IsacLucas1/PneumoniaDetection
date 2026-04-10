@@ -6,7 +6,7 @@ O aplicație Full-Stack (React + Python) bazată pe Inteligență Artificială, 
 
 * **Arhitectură Decuplată (Full-Stack):** Frontend modern și rapid construit cu React (Vite), care comunică printr-un API REST cu un server de Python (FastAPI).
 * **Filtru de Pre-procesare (Domain Shift Mitigation):** Aplicația rezolvă problema clasică de *Domain Shift* (diferența dintre datele de laborator și pozele reale). Backend-ul taie automat marginile negre inutile (Auto-Crop), forțează conversia în tonuri de gri și aplică *Autocontrast* pentru a aduce radiografia la standardele clinice înainte de a o trimite către AI.
-* **Sistem de Triage Medical pe 3 Niveluri:** Modelul nu gândește doar în "Alb și Negru". Pentru a imita prudența medicală reală, diagnosticul este împărțit astfel:
+* **Sistem de Triaj Medical pe 3 Niveluri:** Modelul nu gândește doar în "Alb și Negru". Pentru a imita prudența medicală reală, diagnosticul este împărțit astfel:
   * 🟢 **SĂNĂTOS:** Risc de boală sub 50%.
   * 🟠 **SUSPECT (Necesită verificare):** Zonă de incertitudine (risc 50% - 80%). Semnalează medicului o posibilă anomalie.
   * 🔴 **PNEUMONIE:** Siguranță de peste 80% a prezenței infecției.
