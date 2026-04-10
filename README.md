@@ -1,4 +1,4 @@
-# 🫁 AI Pneumonia Detector
+# AI Pneumonia Detector
 
 O aplicație Full-Stack (React + Python) bazată pe Inteligență Artificială, creată pentru a analiza radiografii pulmonare și a detecta semnele de pneumonie. Proiectul folosește un model de Deep Learning (MobileNetV2) antrenat pe un set de date clinic și dispune de un sistem robust de pre-procesare a imaginilor pentru a funcționa corect pe date din lumea reală.
 
