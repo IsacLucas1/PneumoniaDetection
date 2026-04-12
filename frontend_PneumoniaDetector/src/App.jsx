@@ -37,7 +37,6 @@ function App() {
     }
   };
 
-  // Functii ajutatoare pentru a stabili culorile si iconitele in mod dinamic
   const getCardClass = (diagnostic) => {
     if (diagnostic === "SANATOS") return 'healthy';
     if (diagnostic.includes("SUSPECT")) return 'suspect';
@@ -58,7 +57,6 @@ function App() {
       </header>
 
       <main className="card-container">
-        {/* Buton Custom pentru Upload */}
         <div className="upload-section">
           <label htmlFor="file-upload" className="custom-upload-btn">
             📁 Alege Radiografia
@@ -74,14 +72,12 @@ function App() {
           </span>
         </div>
 
-        {/* Zona de previzualizare a imaginii */}
         {preview && (
           <div className="preview-section">
             <img src={preview} alt="Previzualizare radiografie" className="image-preview" />
           </div>
         )}
 
-        {/* Butonul principal de actiune */}
         <button
           className={`analyze-btn ${loading ? 'pulsing' : ''}`}
           onClick={handleAnalizeaza}
@@ -90,7 +86,6 @@ function App() {
           {loading ? "⚙️ Analizez tiparele..." : "🔍 Genereaza Diagnostic"}
         </button>
 
-        {/* Cardul cu rezultate (Apare doar dupa predictie) */}
         {rezultat && (
           <div className={`result-card ${getCardClass(rezultat.diagnostic)}`}>
             <div className="result-icon">
